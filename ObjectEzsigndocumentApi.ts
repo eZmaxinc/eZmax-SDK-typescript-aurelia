@@ -21,6 +21,7 @@ import {
   EzsigndocumentGetWordsPositionsV1Request,
   EzsigndocumentGetDownloadUrlV1Response,
   EzsigndocumentGetObjectV1Response,
+  EzsigndocumentGetEzsignpagesV1Response,
   EzsigndocumentGetWordsPositionsV1Response,
   EzsigndocumentDeleteObjectV1Response,
 } from './models';
@@ -60,6 +61,13 @@ export interface IEzsigndocumentGetChildrenV1Params {
 export interface IEzsigndocumentGetDownloadUrlV1Params {
   pkiEzsigndocumentID: number;
   eDocumentType: 'Initial' | 'Signed' | 'Proof' | 'Proofdocument';
+}
+
+/**
+ * ezsigndocumentGetEzsignpagesV1 - parameters interface
+ */
+export interface IEzsigndocumentGetEzsignpagesV1Params {
+  pkiEzsigndocumentID: number;
 }
 
 /**
@@ -103,7 +111,7 @@ export class ObjectEzsigndocumentApi extends Api {
   /**
    * Apply an Ezsign Template to the Ezsigndocument.
    * This endpoint applies a predefined template to the ezsign document. This allows to automatically apply all the form and signature fields on a document in a single step.  The document must not already have fields otherwise an error will be returned.
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * @param params.pkiEzsigndocumentID 
    * @param params.ezsigndocumentApplyEzsigntemplateV1Request 
    */
   async ezsigndocumentApplyEzsigntemplateV1(params: IEzsigndocumentApplyEzsigntemplateV1Params): Promise<EzsigndocumentApplyEzsigntemplateV1Response> {
@@ -169,7 +177,7 @@ export class ObjectEzsigndocumentApi extends Api {
 
   /**
    * Delete an existing Ezsigndocument
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * @param params.pkiEzsigndocumentID 
    */
   async ezsigndocumentDeleteObjectV1(params: IEzsigndocumentDeleteObjectV1Params): Promise<EzsigndocumentDeleteObjectV1Response> {
     // Verify required parameters are set
@@ -199,7 +207,7 @@ export class ObjectEzsigndocumentApi extends Api {
   /**
    * Retrieve an existing Ezsigndocument\&#39;s children IDs
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * @param params.pkiEzsigndocumentID 
    */
   async ezsigndocumentGetChildrenV1(params: IEzsigndocumentGetChildrenV1Params): Promise<any> {
     // Verify required parameters are set
@@ -229,7 +237,7 @@ export class ObjectEzsigndocumentApi extends Api {
   /**
    * Retrieve a URL to download documents.
    * This endpoint returns URLs to different files that can be downloaded during the signing process.  These links will expire after 5 minutes so the download of the file should be made soon after retrieving the link.
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * @param params.pkiEzsigndocumentID 
    * @param params.eDocumentType The type of document to retrieve.  1. **Initial** Is the initial document before any signature were applied. 2. **Signed** Is the final document once all signatures were applied. 3. **Proofdocument** Is the evidence report. 4. **Proof** Is the complete evidence archive including all of the above and more. 
    */
   async ezsigndocumentGetDownloadUrlV1(params: IEzsigndocumentGetDownloadUrlV1Params): Promise<EzsigndocumentGetDownloadUrlV1Response> {
@@ -260,9 +268,39 @@ export class ObjectEzsigndocumentApi extends Api {
   }
 
   /**
+   * Retrieve an existing Ezsigndocument\&#39;s Ezsignpages
+   * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
+   * @param params.pkiEzsigndocumentID 
+   */
+  async ezsigndocumentGetEzsignpagesV1(params: IEzsigndocumentGetEzsignpagesV1Params): Promise<EzsigndocumentGetEzsignpagesV1Response> {
+    // Verify required parameters are set
+    this.ensureParamIsSet('ezsigndocumentGetEzsignpagesV1', params, 'pkiEzsigndocumentID');
+
+    // Create URL to call
+    const url = `${this.basePath}/1/object/ezsigndocument/{pkiEzsigndocumentID}/getEzsignpages`
+      .replace(`{${'pkiEzsigndocumentID'}}`, encodeURIComponent(`${params['pkiEzsigndocumentID']}`));
+
+    const response = await this.httpClient.createRequest(url)
+      // Set HTTP method
+      .asGet()
+
+      // Authentication 'Authorization' required
+      .withHeader('Authorization', this.authStorage.getAuthorization())
+      // Send the request
+      .send();
+
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      throw new Error(response.content);
+    }
+
+    // Extract the content
+    return response.content;
+  }
+
+  /**
    * Retrieve an existing Ezsigndocument\&#39;s Form Data
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * @param params.pkiEzsigndocumentID 
    */
   async ezsigndocumentGetFormDataV1(params: IEzsigndocumentGetFormDataV1Params): Promise<any> {
     // Verify required parameters are set
@@ -292,7 +330,7 @@ export class ObjectEzsigndocumentApi extends Api {
   /**
    * Retrieve an existing Ezsigndocument
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * @param params.pkiEzsigndocumentID 
    */
   async ezsigndocumentGetObjectV1(params: IEzsigndocumentGetObjectV1Params): Promise<EzsigndocumentGetObjectV1Response> {
     // Verify required parameters are set
@@ -322,7 +360,7 @@ export class ObjectEzsigndocumentApi extends Api {
   /**
    * Retrieve positions X,Y of given words from a Ezsigndocument
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * @param params.pkiEzsigndocumentID 
    * @param params.ezsigndocumentGetWordsPositionsV1Request 
    */
   async ezsigndocumentGetWordsPositionsV1(params: IEzsigndocumentGetWordsPositionsV1Params): Promise<EzsigndocumentGetWordsPositionsV1Response> {

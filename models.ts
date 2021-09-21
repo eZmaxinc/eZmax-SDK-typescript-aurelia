@@ -658,6 +658,29 @@ export interface EzsigndocumentGetDownloadUrlV1ResponseMPayload {
 
 
 /**
+ * Response for the /1/object/ezsigndocument/{pkiEzsigndocument}/getEzsignpages API Request
+ */
+export interface EzsigndocumentGetEzsignpagesV1Response {
+  mPayload: EzsigndocumentGetEzsignpagesV1ResponseMPayload;
+  objDebugPayload?: CommonResponseObjDebugPayload;
+  objDebug?: CommonResponseObjDebug;
+}
+
+
+export interface EzsigndocumentGetEzsignpagesV1ResponseAllOf {
+  mPayload: EzsigndocumentGetEzsignpagesV1ResponseMPayload;
+}
+
+
+/**
+ * Payload for the /1/object/ezsigndocument/{pkiEzsigndocument}/getEzsignpages API Request
+ */
+export interface EzsigndocumentGetEzsignpagesV1ResponseMPayload {
+  a_objEzsignpage: Array<EzsignpageResponse>;
+}
+
+
+/**
  * Response for the /1/object/ezsigndocument/getDownloadUrl API Request
  */
 export interface EzsigndocumentGetObjectV1Response {
@@ -693,7 +716,7 @@ export interface EzsigndocumentGetObjectV1ResponseMPayload {
    */
   sEzsigndocumentName: string;
   /**
-   * The unique ID of the Ezsigntemplate
+   * The unique ID of the Ezsigndocument
    */
   pkiEzsigndocumentID: number;
   eEzsigndocumentStep: FieldEEzsigndocumentStep;
@@ -878,65 +901,7 @@ export interface EzsigndocumentResponse {
    */
   sEzsigndocumentName: string;
   /**
-   * The unique ID of the Ezsigntemplate
-   */
-  pkiEzsigndocumentID: number;
-  eEzsigndocumentStep: FieldEEzsigndocumentStep;
-  /**
-   * The date and time when the Ezsigndocument was first sent.
-   */
-  dtEzsigndocumentFirstsend: string;
-  /**
-   * The date and time when the Ezsigndocument was sent the last time.
-   */
-  dtEzsigndocumentLastsend: string;
-  /**
-   * The order in which the Ezsigndocument will be presented to the signatory in the Ezsignfolder.
-   */
-  iEzsigndocumentOrder: number;
-  /**
-   * The number of pages in the Ezsigndocument.
-   */
-  iEzsigndocumentPagetotal: number;
-  /**
-   * The number of signatures that were signed in the document.
-   */
-  iEzsigndocumentSignaturesigned: number;
-  /**
-   * The number of total signatures that were requested in the Ezsigndocument.
-   */
-  iEzsigndocumentSignaturetotal: number;
-  /**
-   * MD5 Hash of the initial PDF Document before signatures were applied to it.
-   */
-  sEzsigndocumentMD5initial: string;
-  /**
-   * MD5 Hash of the final PDF Document after all signatures were applied to it.
-   */
-  sEzsigndocumentMD5signed: string;
-  objAudit: CommonAudit;
-}
-
-
-export interface EzsigndocumentResponseAllOf {
-  /**
-   * The unique ID of the Ezsignfolder
-   */
-  fkiEzsignfolderID: number;
-  /**
-   * The maximum date and time at which the document can be signed.
-   */
-  dtEzsigndocumentDuedate: string;
-  /**
-   * The unique ID of the Language.  Valid values:  |Value|Description| |-|-| |1|French| |2|English|
-   */
-  fkiLanguageID: number;
-  /**
-   * The name of the document that will be presented to Ezsignfoldersignerassociations
-   */
-  sEzsigndocumentName: string;
-  /**
-   * The unique ID of the Ezsigntemplate
+   * The unique ID of the Ezsigndocument
    */
   pkiEzsigndocumentID: number;
   eEzsigndocumentStep: FieldEEzsigndocumentStep;
@@ -997,7 +962,7 @@ export interface EzsigndocumentResponseCompound {
    */
   sEzsigndocumentName: string;
   /**
-   * The unique ID of the Ezsigntemplate
+   * The unique ID of the Ezsigndocument
    */
   pkiEzsigndocumentID: number;
   eEzsigndocumentStep: FieldEEzsigndocumentStep;
@@ -1413,6 +1378,41 @@ export interface EzsignfoldersignerassociationRequestCompoundAllOf {
 
 
 /**
+ * An Ezsignpage Object
+ */
+export interface EzsignpageResponse {
+  /**
+   * The unique ID of the Ezsignpage
+   */
+  pkiEzsignpageID: number;
+  /**
+   * The Width of the page\'s image in pixels calculated at 100 DPI
+   */
+  iEzsignpageWidthimage: number;
+  /**
+   * The Height of the page\'s image in pixels calculated at 100 DPI
+   */
+  iEzsignpageHeightimage: number;
+  /**
+   * The Width of the page in points calculated at 72 DPI
+   */
+  iEzsignpageWidthpdf: number;
+  /**
+   * The Height of the page in points calculated at 72 DPI
+   */
+  iEzsignpageHeightpdf: number;
+  /**
+   * The page number in the Ezsigndocument
+   */
+  iEzsignpagePagenumber: number;
+  /**
+   * The Url to the Ezsignpage\'s rasterized image.  Url will expire after 5 minutes.
+   */
+  sImageUrl: string;
+}
+
+
+/**
  * Request for the /1/object/ezsignsignature/createObject API Request
  */
 export interface EzsignsignatureCreateObjectV1Request {
@@ -1486,7 +1486,7 @@ export interface EzsignsignatureRequest {
    */
   fkiEzsignfoldersignerassociationID: number;
   /**
-   * The page number in the document where to apply the signature
+   * The page number in the Ezsigndocument
    */
   iEzsignpagePagenumber: number;
   /**
@@ -1503,7 +1503,7 @@ export interface EzsignsignatureRequest {
   iEzsignsignatureStep: number;
   eEzsignsignatureType: FieldEEzsignsignatureType;
   /**
-   * The unique ID of the Ezsigntemplate
+   * The unique ID of the Ezsigndocument
    */
   fkiEzsigndocumentID: number;
 }
@@ -1518,7 +1518,7 @@ export interface EzsignsignatureRequestCompound {
    */
   fkiEzsignfoldersignerassociationID: number;
   /**
-   * The page number in the document where to apply the signature
+   * The page number in the Ezsigndocument
    */
   iEzsignpagePagenumber: number;
   /**
@@ -1535,7 +1535,7 @@ export interface EzsignsignatureRequestCompound {
   iEzsignsignatureStep: number;
   eEzsignsignatureType: FieldEEzsignsignatureType;
   /**
-   * The unique ID of the Ezsigntemplate
+   * The unique ID of the Ezsigndocument
    */
   fkiEzsigndocumentID: number;
 }

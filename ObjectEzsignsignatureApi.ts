@@ -98,7 +98,7 @@ export class ObjectEzsignsignatureApi extends Api {
 
   /**
    * Delete an existing Ezsignsignature
-   * @param params.pkiEzsignsignatureID The unique ID of the Ezsignsignature
+   * @param params.pkiEzsignsignatureID 
    */
   async ezsignsignatureDeleteObjectV1(params: IEzsignsignatureDeleteObjectV1Params): Promise<EzsignsignatureDeleteObjectV1Response> {
     // Verify required parameters are set
@@ -128,7 +128,7 @@ export class ObjectEzsignsignatureApi extends Api {
   /**
    * Retrieve an existing Ezsignsignature\&#39;s children IDs
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsignsignatureID The unique ID of the Ezsignsignature
+   * @param params.pkiEzsignsignatureID 
    */
   async ezsignsignatureGetChildrenV1(params: IEzsignsignatureGetChildrenV1Params): Promise<any> {
     // Verify required parameters are set
@@ -158,7 +158,7 @@ export class ObjectEzsignsignatureApi extends Api {
   /**
    * Retrieve an existing Ezsignsignature
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsignsignatureID The unique ID of the Ezsignsignature
+   * @param params.pkiEzsignsignatureID 
    */
   async ezsignsignatureGetObjectV1(params: IEzsignsignatureGetObjectV1Params): Promise<EzsignsignatureGetObjectV1Response> {
     // Verify required parameters are set

@@ -106,7 +106,7 @@ export class ObjectEzsignfoldersignerassociationApi extends Api {
 
   /**
    * Delete an existing Ezsignfoldersignerassociation
-   * @param params.pkiEzsignfoldersignerassociationID The unique ID of the Ezsignfoldersignerassociation
+   * @param params.pkiEzsignfoldersignerassociationID 
    */
   async ezsignfoldersignerassociationDeleteObjectV1(params: IEzsignfoldersignerassociationDeleteObjectV1Params): Promise<EzsignfoldersignerassociationDeleteObjectV1Response> {
     // Verify required parameters are set
@@ -136,7 +136,7 @@ export class ObjectEzsignfoldersignerassociationApi extends Api {
   /**
    * Retrieve an existing Ezsignfoldersignerassociation\&#39;s children IDs
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsignfoldersignerassociationID The unique ID of the Ezsignfoldersignerassociation
+   * @param params.pkiEzsignfoldersignerassociationID 
    */
   async ezsignfoldersignerassociationGetChildrenV1(params: IEzsignfoldersignerassociationGetChildrenV1Params): Promise<any> {
     // Verify required parameters are set
@@ -166,7 +166,7 @@ export class ObjectEzsignfoldersignerassociationApi extends Api {
   /**
    * Retrieve a Login Url to allow In-Person signing
    * This endpoint returns a Login Url that can be used in a browser or embedded in an I-Frame to allow in person signing.  The signer Login type must be configured as In-Person.
-   * @param params.pkiEzsignfoldersignerassociationID The unique ID of the Ezsignfoldersignerassociation
+   * @param params.pkiEzsignfoldersignerassociationID 
    */
   async ezsignfoldersignerassociationGetInPersonLoginUrlV1(params: IEzsignfoldersignerassociationGetInPersonLoginUrlV1Params): Promise<EzsignfoldersignerassociationGetInPersonLoginUrlV1Response> {
     // Verify required parameters are set
@@ -196,7 +196,7 @@ export class ObjectEzsignfoldersignerassociationApi extends Api {
   /**
    * Retrieve an existing Ezsignfoldersignerassociation
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsignfoldersignerassociationID The unique ID of the Ezsignfoldersignerassociation
+   * @param params.pkiEzsignfoldersignerassociationID 
    */
   async ezsignfoldersignerassociationGetObjectV1(params: IEzsignfoldersignerassociationGetObjectV1Params): Promise<EzsignfoldersignerassociationGetObjectV1Response> {
     // Verify required parameters are set

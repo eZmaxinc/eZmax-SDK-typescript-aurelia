@@ -44,6 +44,13 @@ export interface IEzsignfolderGetChildrenV1Params {
 }
 
 /**
+ * ezsignfolderGetFormsDataV1 - parameters interface
+ */
+export interface IEzsignfolderGetFormsDataV1Params {
+  pkiEzsignfolderID: number;
+}
+
+/**
  * ezsignfolderGetObjectV1 - parameters interface
  */
 export interface IEzsignfolderGetObjectV1Params {
@@ -108,7 +115,7 @@ export class ObjectEzsignfolderApi extends Api {
 
   /**
    * Delete an existing Ezsignfolder
-   * @param params.pkiEzsignfolderID The unique ID of the Ezsignfolder
+   * @param params.pkiEzsignfolderID 
    */
   async ezsignfolderDeleteObjectV1(params: IEzsignfolderDeleteObjectV1Params): Promise<EzsignfolderDeleteObjectV1Response> {
     // Verify required parameters are set
@@ -138,7 +145,7 @@ export class ObjectEzsignfolderApi extends Api {
   /**
    * Retrieve an existing Ezsignfolder\&#39;s children IDs
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsignfolderID The unique ID of the Ezsignfolder
+   * @param params.pkiEzsignfolderID 
    */
   async ezsignfolderGetChildrenV1(params: IEzsignfolderGetChildrenV1Params): Promise<any> {
     // Verify required parameters are set
@@ -166,9 +173,39 @@ export class ObjectEzsignfolderApi extends Api {
   }
 
   /**
+   * Retrieve an existing Ezsignfolder\&#39;s forms data
+   * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
+   * @param params.pkiEzsignfolderID 
+   */
+  async ezsignfolderGetFormsDataV1(params: IEzsignfolderGetFormsDataV1Params): Promise<any> {
+    // Verify required parameters are set
+    this.ensureParamIsSet('ezsignfolderGetFormsDataV1', params, 'pkiEzsignfolderID');
+
+    // Create URL to call
+    const url = `${this.basePath}/1/object/ezsignfolder/{pkiEzsignfolderID}/getFormsData`
+      .replace(`{${'pkiEzsignfolderID'}}`, encodeURIComponent(`${params['pkiEzsignfolderID']}`));
+
+    const response = await this.httpClient.createRequest(url)
+      // Set HTTP method
+      .asGet()
+
+      // Authentication 'Authorization' required
+      .withHeader('Authorization', this.authStorage.getAuthorization())
+      // Send the request
+      .send();
+
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      throw new Error(response.content);
+    }
+
+    // Extract the content
+    return response.content;
+  }
+
+  /**
    * Retrieve an existing Ezsignfolder
    * ## ⚠️EARLY ADOPTERS WARNING  ### This endpoint is not officially released. Its definition might still change and it might not be available in every environment and region.
-   * @param params.pkiEzsignfolderID The unique ID of the Ezsignfolder
+   * @param params.pkiEzsignfolderID 
    */
   async ezsignfolderGetObjectV1(params: IEzsignfolderGetObjectV1Params): Promise<EzsignfolderGetObjectV1Response> {
     // Verify required parameters are set
@@ -197,7 +234,7 @@ export class ObjectEzsignfolderApi extends Api {
 
   /**
    * Send the Ezsignfolder to the signatories for signature
-   * @param params.pkiEzsignfolderID The unique ID of the Ezsignfolder
+   * @param params.pkiEzsignfolderID 
    * @param params.ezsignfolderSendV1Request 
    */
   async ezsignfolderSendV1(params: IEzsignfolderSendV1Params): Promise<EzsignfolderSendV1Response> {

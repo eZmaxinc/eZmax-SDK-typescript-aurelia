@@ -45,7 +45,7 @@ export class GlobalCustomerApi extends Api {
   /**
    * Get customer endpoint
    * Retrieve the customer\&#39;s specific server endpoint where to send requests. This will help locate the proper region (ie: sInfrastructureregionCode) and the proper environment (ie: sInfrastructureenvironmenttypeDescription) where the customer\&#39;s data is stored.
-   * @param params.pksCustomerCode The customer code assigned to your account
+   * @param params.pksCustomerCode 
    * @param params.sInfrastructureproductCode The infrastructure product Code  If undefined, \&quot;appcluster01\&quot; is assumed
    */
   async globalCustomerGetEndpointV1(params: IGlobalCustomerGetEndpointV1Params): Promise<GlobalCustomerGetEndpointV1Response> {
